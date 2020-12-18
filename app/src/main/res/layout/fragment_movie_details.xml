@@ -27,21 +27,23 @@
             android:id="@+id/topmovieImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/orig"
-            android:src="@drawable/mask"
+            android:src="@drawable/orig"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageView
             android:id="@+id/mask"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/mask" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@id/topmovieImage"
+            app:layout_constraintEnd_toEndOf="@id/topmovieImage"
+            app:layout_constraintStart_toStartOf="@id/topmovieImage"
+            app:layout_constraintTop_toTopOf="@id/topmovieImage"
+            app:srcCompat="@drawable/mask"
+            />
 
         <TextView
             android:id="@+id/back_text"
@@ -82,7 +84,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible"
             app:layout_constraintGuide_begin="16dp" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -203,7 +204,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/imgView3"
             app:layout_constraintTop_toBottomOf="@id/castTV"
-            app:srcCompat="@mipmap/ic_movie_hemsworth" />
+            app:srcCompat="@drawable/movie_hemsworth" />
 
         <ImageView
             android:id="@+id/imgView2"
@@ -215,7 +216,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/imgView1"
             app:layout_constraintTop_toBottomOf="@id/castTV"
-            app:srcCompat="@mipmap/ic_movie_evans" />
+            app:srcCompat="@drawable/movie_evans" />
 
         <ImageView
             android:id="@+id/imgView1"
@@ -226,7 +227,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@id/guideline"
             app:layout_constraintTop_toBottomOf="@id/castTV"
-            app:srcCompat="@mipmap/ic_movie_downey" />
+            app:srcCompat="@drawable/movie_downey" />
 
         <ImageView
             android:id="@+id/imgView3"
@@ -238,7 +239,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/imgView2"
             app:layout_constraintTop_toBottomOf="@id/castTV"
-            app:srcCompat="@mipmap/ic_movie_ruffalo" />
+            app:srcCompat="@drawable/movie_ruffalo" />
 
         <TextView
             android:id="@+id/txtView1"
