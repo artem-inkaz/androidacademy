@@ -2,17 +2,11 @@ package com.example.androidacademy
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.androidacademy.model.Movie
 import com.example.androidacademy.ui.FragmentMoviesDetails
 import com.example.androidacademy.ui.FragmentMoviesList
 
-class MainActivity : AppCompatActivity(),
-    FragmentMoviesList.FragmentMovieListClickListener,
-    FragmentMoviesDetails.FragmentMoviesDetailsBackClickListener
-{
-//    private val FragmentMoviesList =
-//        FragmentMoviesList().apply { setClickListener(this@MainActivity) }
-//    private val FragmentMoviesDetails =
-//        FragmentMoviesDetails().apply { setClickListener(this@MainActivity) }
+class MainActivity : AppCompatActivity(), ChangeFragment {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,35 +16,30 @@ class MainActivity : AppCompatActivity(),
             gotoFragmentMoviesList()
         }
     }
-        //открываем фрагмент MovieDetailsFragment когда кликаем по записи фильма
-    override fun onMovieListSelected() {
-        gotoFragmentMoviesDetails()
-    }
-    //переходим обратно к предыдущему фрагменту
-    override fun onMovieListBack() {
-        gotoBack()
-    }
-        // отображение фрагмента FragmentMoviesList.kt
-    private fun gotoFragmentMoviesList() {
-        supportFragmentManager.beginTransaction()
-            .apply {
-                add(R.id.FrameLayoutMain, FragmentMoviesList())
-                addToBackStack(null)
-                commit()
-            }
-    }
-    // отображение фрагмента FragmentMoviesDetails.kt
-    private fun gotoFragmentMoviesDetails() {
-        supportFragmentManager.beginTransaction()
-            .apply {
-                add(R.id.FrameLayoutMain, FragmentMoviesDetails())
-                addToBackStack(null)
 
+        // отображение фрагмента FragmentMoviesList.kt
+        private fun gotoFragmentMoviesList() {
+        supportFragmentManager.beginTransaction()
+            .apply {
+                add(R.id.frame_layout_main, FragmentMoviesList())
+                addToBackStack(null)
                 commit()
             }
     }
-        // Возвращаемся обратно
-    private fun  gotoBack() {
+
+    // отображение фрагмента FragmentMoviesDetails.kt
+    override fun gotoFragmentMoviesDetails(movie: Movie) {
+        val fragment = FragmentMoviesDetails()
+        supportFragmentManager.beginTransaction()
+            .apply {
+                add(R.id.frame_layout_main, fragment)
+                addToBackStack(null)
+                commit()
+            }
+    }
+
+       // Возвращаемся обратно
+       override fun backFragmentMoviesList() {
         supportFragmentManager.popBackStack()
     }
 }

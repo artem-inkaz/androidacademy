@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Layout_movie_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#191926"
-    >
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/Layout_movie_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#191926"
-        tools:context=".MovieDetailsActivity">
+    android:background="@color/background_movies_list" >
 
         <ImageView
             android:id="@+id/top_menu_bg"
@@ -24,14 +17,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/top_menu_bg" />
 
-        <ImageView
-            android:id="@+id/imgView_list_head"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/top_menu_bg"
-            app:layout_constraintStart_toEndOf="@id/guideline"
-            app:layout_constraintTop_toTopOf="@id/top_menu_bg"
-            app:srcCompat="@drawable/ic_combined_shape" />
+    <ImageView
+        android:id="@+id/imgView_list_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/top_menu_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/top_menu_bg"
+        app:srcCompat="@drawable/ic_combined_shape" />
 
         <TextView
             android:id="@+id/movies_list"
@@ -43,168 +37,26 @@
             android:gravity="center_horizontal|left"
             android:lineSpacingExtra="2sp"
             android:text="Movies list"
-            android:textColor="#ffffff"
+            android:textColor="@color/movies_list"
             app:layout_constraintBottom_toBottomOf="@id/top_menu_bg"
             app:layout_constraintStart_toEndOf="@id/imgView_list_head"
             app:layout_constraintTop_toTopOf="@id/top_menu_bg"
             app:layout_constraintVertical_bias="1.0" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/movie_list_items"
-            android:layout_width="170dp"
-            android:layout_height="296dp"
-            android:background="@drawable/ic_bg_c"
-            app:layout_constraintStart_toEndOf="@id/guideline"
-            app:layout_constraintTop_toBottomOf="@id/top_menu_bg">
 
-            <ImageView
-                android:id="@+id/movie_list_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginEnd="2dp"
-                app:layout_constraintEnd_toEndOf="@id/movie_list_items"
-                app:layout_constraintStart_toStartOf="@id/movie_list_items"
-                app:layout_constraintTop_toTopOf="@id/movie_list_items"
-                app:srcCompat="@drawable/mask_movie" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_movie_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_menu_bg" />
 
-            <ImageView
-                android:id="@+id/imgView_rec_pg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="@id/movie_list_name"
-                app:layout_constraintTop_toTopOf="@id/movie_list_name"
-                app:srcCompat="@drawable/ic_rectangle" />
 
-            <ImageView
-                android:id="@+id/imgView_like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
-                android:layout_marginEnd="6dp"
-                app:layout_constraintEnd_toEndOf="@id/movie_list_name"
-                app:layout_constraintTop_toTopOf="@id/movie_list_name"
-                app:srcCompat="@drawable/ic_like" />
-
-            <TextView
-                android:id="@+id/pg_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_bold"
-                android:gravity="center_vertical"
-                android:text="@string/pg_name_text"
-                android:textColor="#FFFFFF"
-                android:textSize="12dp"
-                app:layout_constraintBottom_toBottomOf="@id/imgView_rec_pg"
-                app:layout_constraintEnd_toEndOf="@id/imgView_rec_pg"
-                app:layout_constraintStart_toStartOf="@id/imgView_rec_pg"
-                app:layout_constraintTop_toTopOf="@id/imgView_rec_pg"
-                tools:layout_editor_absoluteX="12dp" />
-
-            <TextView
-                android:id="@+id/tagLineTV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="214dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="22dp"
-                android:fontFamily="@font/roboto_light"
-                android:text="@string/category_movie_text"
-                android:textColor="#FF3466"
-                android:textSize="8dp"
-                app:layout_constraintBottom_toBottomOf="@id/movie_list_name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/movie_list_name"
-                app:layout_constraintTop_toTopOf="@id/movie_list_name" />
-
-            <RatingBar
-                android:id="@+id/movieRatingBar"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="2dp"
-                android:numStars="5"
-                android:rating="4"
-                android:stepSize="1"
-                android:theme="@style/MovieRatingBar"
-                app:layout_constraintStart_toStartOf="@id/movie_list_name"
-                app:layout_constraintTop_toBottomOf="@id/tagLineTV" />
-
-            <TextView
-                android:id="@+id/reviewTV"
-                android:layout_width="53dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/roboto_bold"
-                android:gravity="center_vertical"
-                android:lineSpacingExtra="4sp"
-                android:text="@string/review_text"
-                android:textColor="#6D6D80"
-                android:textSize="8dp"
-                app:layout_constraintStart_toEndOf="@id/movieRatingBar"
-                app:layout_constraintTop_toBottomOf="@id/tagLineTV"
-                app:textAllCaps="true" />
-
-            <TextView
-                android:id="@+id/movieName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/roboto_bold"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:text="Avengers:End Game"
-                android:textColor="#ECECEC"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@id/movie_list_items"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/movie_list_items"
-                app:layout_constraintTop_toBottomOf="@+id/movie_list_name"
-                app:lineHeight="14sp" />
-
-            <TextView
-                android:id="@+id/txtView_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/roboto_bold"
-                android:gravity="center_horizontal|left"
-                android:text="137 min"
-                android:textColor="#565665"
-                android:textSize="8dp"
-                app:layout_constraintBottom_toBottomOf="@id/movie_list_items"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/movie_list_items"
-                app:layout_constraintTop_toBottomOf="@id/movieName"
-                app:textAllCaps="true" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="16dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="12dp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
