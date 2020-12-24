@@ -66,6 +66,7 @@ class FragmentMoviesDetails :Fragment(R.layout.fragment_movie_details){
         val overview: TextView = view.findViewById(R.id.story_descriptionTV)
         val rv_foto_actors: RecyclerView= view.findViewById(R.id.rv_foto_actors)
 
+
         Glide.with(requireContext())
             .load(movie.backdrop)
             //  .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
