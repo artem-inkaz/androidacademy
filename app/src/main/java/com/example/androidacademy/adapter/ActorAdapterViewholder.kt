@@ -7,9 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidacademy.R
-import com.example.androidacademy.model.Actor
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.androidacademy.data.Actor
 
 class ActorAdapterViewholder : RecyclerView.Adapter<ActorViewHolder>() {
 
@@ -22,13 +22,10 @@ class ActorAdapterViewholder : RecyclerView.Adapter<ActorViewHolder>() {
                 .inflate(R.layout.view_holder_actor, parent, false))
 
     override fun onBindViewHolder(holder: ActorViewHolder, position: Int) {
- //       when (holder) {
-///        is ActorViewHolder ->{
             holder.onBind(actorsList[position])
             holder.itemView.setOnClickListener {
             }
-//        }
- //       }
+
     }
 
     override fun getItemCount(): Int = actorsList.size
@@ -38,8 +35,6 @@ class ActorAdapterViewholder : RecyclerView.Adapter<ActorViewHolder>() {
         notifyDataSetChanged()
     }
 }
-
-//abstract class ActorsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
@@ -55,20 +50,13 @@ class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
     fun onBind(actor: Actor) {
         Glide.with(itemView.context)
-                .load(actor.foto_actor)
+                .load(actor.picture)
                 .apply(imageOption)
                 .into(imgViewActors)
 
-        imgViewActors.setImageResource(actor.foto_actor)
+   //     imgViewActors.setImageResource(actor.picture)
         txtViewActorName?.text = actor.name
     }
 
 }
 
-//private val RecyclerView.ViewHolder.context
-//    get() = this.itemView.context
-
-
-//interface OnRecyclerActorsItemClickListener {
-//    fun onClick(actor: Actor)
-//}

@@ -13,8 +13,7 @@ import com.example.androidacademy.ChangeFragment
 import com.example.androidacademy.R
 import com.example.androidacademy.adapter.MovieAdapterViewholder
 import com.example.androidacademy.adapter.OnRecyclerMovieClickListener
-import com.example.androidacademy.data.DatabaseMovies
-import com.example.androidacademy.model.Movie
+import com.example.androidacademy.data.Movie
 
 //const val  GRID_LAYOUT_ROW_COUNT = 2
 

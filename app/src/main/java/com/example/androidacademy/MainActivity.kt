@@ -2,7 +2,7 @@ package com.example.androidacademy
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.androidacademy.model.Movie
+import com.example.androidacademy.data.Movie
 import com.example.androidacademy.ui.FragmentMoviesDetails
 import com.example.androidacademy.ui.FragmentMoviesList
 

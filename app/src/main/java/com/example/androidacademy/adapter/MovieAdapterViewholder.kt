@@ -8,9 +8,9 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidacademy.R
-import com.example.androidacademy.model.Movie
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.androidacademy.data.Movie
 
 class MovieAdapterViewholder(
         private var moviesclickListener: OnRecyclerMovieClickListener
@@ -23,14 +23,11 @@ class MovieAdapterViewholder(
             .inflate(R.layout.view_holder_movie, parent, false))
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-//        when (holder) {
-//            is MovieViewHolder -> {
                 holder.onBind(moviesList[position])
                 holder.itemView.setOnClickListener {
                     moviesclickListener.onClick(moviesList[position])
                 }
-//            }
-//        }
+
     }
     override fun getItemCount(): Int = moviesList.size
 
@@ -42,8 +39,6 @@ class MovieAdapterViewholder(
 
 }
 
-//abstract class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
 class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
     companion object {
@@ -54,29 +49,29 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
     }
 
 
-    private val movie_list_picture: ImageView = itemView.findViewById(R.id.movie_list_picture)
+    private val poster: ImageView = itemView.findViewById(R.id.movie_list_picture)
     private val movieName: TextView = itemView.findViewById(R.id.movieName)
-    private val pg_name: TextView = itemView.findViewById(R.id.pg_name)
+    private val pgName: TextView = itemView.findViewById(R.id.pg_name)
     private val reviewTV: TextView = itemView.findViewById(R.id.reviewTV)
-    private val tagLineTV: TextView = itemView.findViewById(R.id.tagLineTV)
-    private val txtView_time: TextView = itemView.findViewById(R.id.txtView_time)
+    private val genres: TextView = itemView.findViewById(R.id.tagLineTV)
+    private val txtViewTime: TextView = itemView.findViewById(R.id.txtView_time)
     private val movieRatingBar: RatingBar = itemView.findViewById(R.id.movieRatingBar)
     private val like: ImageView = itemView.findViewById(R.id.imgView_like)
 
     fun onBind(movie: Movie) {
         Glide.with(itemView.context)
-                .load(movie.movieListPicture)
+                .load(movie.poster)
                 .apply(imageOption)
-                .into(movie_list_picture)
+                .into(poster)
 
  //       movie_list_picture.setImageResource(movie.movie_list_picture)
-        like.setImageResource(movie.like)
-        movieRatingBar.rating = movie.movieRatingBar
-        movieName.text = movie.movieName
-        pg_name.text = movie.pgName
-        reviewTV.text = movie.reviewTV
-        tagLineTV.text = movie.tagLineTV
-        txtView_time.text = movie.txtViewTime
+   //     like.setImageResource(movie.like)
+        movieRatingBar.rating = movie.ratings
+        movieName.text = movie.title
+    //    pgName.text = movie.pgName
+     //   reviewTV.text = movie.review
+        genres.text = movie.genres.joinToString(", ") { it.name }
+        txtViewTime.text ="{movie.runtime} min"
     }
 
 }

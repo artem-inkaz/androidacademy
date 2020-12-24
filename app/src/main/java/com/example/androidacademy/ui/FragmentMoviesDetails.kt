@@ -16,8 +16,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.androidacademy.ChangeFragment
 import com.example.androidacademy.R
 import com.example.androidacademy.adapter.ActorAdapterViewholder
-import com.example.androidacademy.data.DatabaseActors
-import com.example.androidacademy.model.Movie
+import com.example.androidacademy.data.Movie
 
 class FragmentMoviesDetails :Fragment(R.layout.fragment_movie_details){
 

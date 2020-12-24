@@ -1,8 +1,6 @@
 package com.example.androidacademy.data
 
 import android.content.Context
-import com.example.androidacademy.model.Actor
-import com.example.androidacademy.model.Genre
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
