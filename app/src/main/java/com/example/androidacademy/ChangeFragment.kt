@@ -1,6 +1,6 @@
 package com.example.androidacademy
 
-import com.example.androidacademy.model.Movie
+import com.example.androidacademy.data.Movie
 
 interface ChangeFragment {
    fun backFragmentMoviesList()
