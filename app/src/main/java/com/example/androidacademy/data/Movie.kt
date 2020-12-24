@@ -1,5 +1,10 @@
 package com.example.androidacademy.data
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+
+@Parcelize
 data class Movie(
     val id: Int,
     val title: String,
@@ -7,10 +12,10 @@ data class Movie(
     val poster: String,
     val backdrop: String,
     val ratings: Float,
-    val numberOfRatings: Int,
     val minimumAge: Int,
     val runtime: Int,
+    val reviews: Int,
     val genres: List<Genre>,
     val actors: List<Actor>
-  //  val like: Int
-)
+   // val like: Boolean
+) : Parcelable

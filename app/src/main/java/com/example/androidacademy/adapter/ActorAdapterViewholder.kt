@@ -25,7 +25,6 @@ class ActorAdapterViewholder : RecyclerView.Adapter<ActorViewHolder>() {
             holder.onBind(actorsList[position])
             holder.itemView.setOnClickListener {
             }
-
     }
 
     override fun getItemCount(): Int = actorsList.size
