@@ -13,15 +13,16 @@ import com.example.androidacademy.ChangeFragment
 import com.example.androidacademy.R
 import com.example.androidacademy.adapter.MovieAdapterViewholder
 import com.example.androidacademy.adapter.OnRecyclerMovieClickListener
-import com.example.androidacademy.data.Database_movies
+import com.example.androidacademy.data.DatabaseMovies
 import com.example.androidacademy.model.Movie
 
-const val  GRID_LAYOUT_ROW_COUNT = 2
+//const val  GRID_LAYOUT_ROW_COUNT = 2
 
 class FragmentMoviesList :Fragment(){
 
     private var recycler: RecyclerView? = null
     private var changeFragment: ChangeFragment? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,21 +57,22 @@ class FragmentMoviesList :Fragment(){
 
     private fun updateData() {
         (recycler?.adapter as? MovieAdapterViewholder)?.
-        bindMovie(Database_movies().getMovies())
+        bindMovie(DatabaseMovies().getMovies())
     }
 
     private val moviesclickListener = object : OnRecyclerMovieClickListener {
         override fun onClick(movie: Movie) {
-            recycler?.let { rv ->
+//            recycler?.let { rv ->
                 Log.d("Parcel", "move.name = ${movie.movieName}")
                 changeFragment?.gotoFragmentMoviesDetails(movie)
 
-          }
+//          }
         }
     }
 
 
     companion object {
-        fun create() = FragmentMoviesList()
+//        fun create() = FragmentMoviesList()
+        const val  GRID_LAYOUT_ROW_COUNT = 2
     }
 }

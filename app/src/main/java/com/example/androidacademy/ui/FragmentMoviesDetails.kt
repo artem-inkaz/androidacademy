@@ -16,10 +16,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.androidacademy.ChangeFragment
 import com.example.androidacademy.R
 import com.example.androidacademy.adapter.ActorAdapterViewholder
-import com.example.androidacademy.adapter.ActorsViewHolder
-import com.example.androidacademy.adapter.MovieAdapterViewholder
-import com.example.androidacademy.data.Database_actors
-import com.example.androidacademy.model.Actor
+import com.example.androidacademy.data.DatabaseActors
 import com.example.androidacademy.model.Movie
 
 class FragmentMoviesDetails :Fragment(R.layout.fragment_movie_details){
@@ -35,11 +32,11 @@ class FragmentMoviesDetails :Fragment(R.layout.fragment_movie_details){
     ): View? {
 
         //возвращаемся обратно по клику, где написано Back
-        view?.findViewById<View>(R.id.top_menu_bg)?.apply {
-            setOnClickListener {
-                changeFragment?.backFragmentMoviesList()
-            }
-        }
+//        view?.findViewById<View>(R.id.top_menu_bg)?.apply {
+//            setOnClickListener {
+//                changeFragment?.backFragmentMoviesList()
+//            }
+//        }
         return inflater.inflate(R.layout.fragment_movie_details, container, false)
     }
 
@@ -69,16 +66,16 @@ class FragmentMoviesDetails :Fragment(R.layout.fragment_movie_details){
             .fallback(R.drawable.ic_combined_shape)
             .centerCrop()
 
-        val bundle = arguments
-        if (bundle != null) {
+ //       val bundle = arguments
+        if (arguments != null) {
             Glide.with(context)
-                .load(movie?.detail_picture)
+                .load(movie?.detailPicture)
                 .apply(imageOption)
                 .into(detail_picture)
 
-            detail_picture.setImageResource(movie?.movie_list_picture)
+            detail_picture.setImageResource(movie?.movieListPicture)
             movieName.setText(movie?.movieName)
-            pg_name.setText(movie?.pg_name)
+            pg_name.setText(movie?.pgName)
             reviewTV.setText(movie?.reviewTV)
             tagLineTV.setText(movie?.tagLineTV)
             story.setText(movie?.story)
@@ -101,14 +98,14 @@ class FragmentMoviesDetails :Fragment(R.layout.fragment_movie_details){
     }
 
     private fun updateData() {
-        adapter.bindActors(Database_actors().getActors())
+        adapter.bindActors(DatabaseActors().getActors())
         adapter.notifyDataSetChanged()
     }
 
     override fun onDetach() {
+        super.onDetach()
         changeFragment = null
 
-        super.onDetach()
     }
 
 

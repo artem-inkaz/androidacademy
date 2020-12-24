@@ -4,7 +4,7 @@ package com.example.androidacademy.data
 import com.example.androidacademy.R
 import com.example.androidacademy.model.Movie
 
-class Database_movies {
+class DatabaseMovies {
     fun getMovies(): List<Movie> {
          return listOf(
                  Movie(

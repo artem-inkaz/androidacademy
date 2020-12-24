@@ -11,30 +11,24 @@ import com.example.androidacademy.model.Actor
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-class ActorAdapterViewholder(
-      //  private val actorsclickListener: OnRecyclerActorsItemClickListener
-        ) : RecyclerView.Adapter<ActorsViewHolder>() {
-
+class ActorAdapterViewholder : RecyclerView.Adapter<ActorViewHolder>() {
 
     private var actorsList = listOf<Actor>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorsViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder =
         ActorViewHolder(
             LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.view_holder_actor, parent, false))
 
-    override fun onBindViewHolder(holder: ActorsViewHolder, position: Int) {
-        when (holder) {
-        is ActorViewHolder ->{
+    override fun onBindViewHolder(holder: ActorViewHolder, position: Int) {
+ //       when (holder) {
+///        is ActorViewHolder ->{
             holder.onBind(actorsList[position])
             holder.itemView.setOnClickListener {
-//                if (actorsclickListener != null) {
-//                    actorsclickListener.onClick(actorsList[position])
-//                }
             }
-        }
-        }
+//        }
+ //       }
     }
 
     override fun getItemCount(): Int = actorsList.size
@@ -45,9 +39,9 @@ class ActorAdapterViewholder(
     }
 }
 
-abstract class ActorsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+//abstract class ActorsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-private class ActorViewHolder(itemView: View) : ActorsViewHolder(itemView){
+class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
     companion object {
         private val imageOption = RequestOptions()
@@ -71,10 +65,10 @@ private class ActorViewHolder(itemView: View) : ActorsViewHolder(itemView){
 
 }
 
-private val RecyclerView.ViewHolder.context
-    get() = this.itemView.context
+//private val RecyclerView.ViewHolder.context
+//    get() = this.itemView.context
 
 
-interface OnRecyclerActorsItemClickListener {
-    fun onClick(actor: Actor)
-}
+//interface OnRecyclerActorsItemClickListener {
+//    fun onClick(actor: Actor)
+//}
