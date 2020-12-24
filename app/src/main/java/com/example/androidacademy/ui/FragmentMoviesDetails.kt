@@ -26,7 +26,7 @@ class FragmentMoviesDetails :Fragment(R.layout.fragment_movie_details){
 
     private var changeFragment: ChangeFragment? = null
     private lateinit var adapter: ActorAdapterViewholder
-    //private lateinit var movie: Movie
+    private lateinit var movie: Movie
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,7 +54,7 @@ class FragmentMoviesDetails :Fragment(R.layout.fragment_movie_details){
 
 //        val movie: Movie? = requireArguments().getParcelable(Movie::class.java.simpleName)
 //        movie?.let{ setMovieData(it) }
-       val movie: List<Movie>? = null
+//       val movie: List<Movie>? = null
 //        setMovieData(it)
 
         val backdrop: ImageView = view.findViewById(R.id.topmovieImage)
@@ -67,7 +67,7 @@ class FragmentMoviesDetails :Fragment(R.layout.fragment_movie_details){
         val rv_foto_actors: RecyclerView= view.findViewById(R.id.rv_foto_actors)
 
 
-        Glide.with(requireContext())
+        Glide.with(context)
             .load(movie.backdrop)
             //  .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
             .apply(imageOption)
