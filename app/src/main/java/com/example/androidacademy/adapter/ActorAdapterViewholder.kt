@@ -49,13 +49,13 @@ class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
     fun onBind(actor: Actor) {
         Glide.with(itemView.context)
-                .load(actor.picture)
-                .apply(imageOption)
-                .into(imgViewActors)
+            .load(actor.picture)
+            .apply(imageOption)
+            .into(imgViewActors)
 
-   //     imgViewActors.setImageResource(actor.picture)
         txtViewActorName?.text = actor.name
     }
 
 }
+
 

@@ -25,12 +25,6 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
             supportFragmentManager.commit {
                 add<FragmentMoviesList>(R.id.frame_layout_main)
             }
-//        supportFragmentManager.beginTransaction()
-//            .apply {
-//                add(R.id.frame_layout_main, FragmentMoviesList())
-//                addToBackStack(null)
-//                commit()
-//            }
     }
 
     // отображение фрагмента FragmentMoviesDetails.kt
@@ -38,13 +32,6 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
         val bundle = Bundle().apply {
             putParcelable(Movie::class.java.simpleName, movie)
         }
-//        val fragment = FragmentMoviesDetails()
-//        supportFragmentManager.beginTransaction()
-//            .apply {
-//                add(R.id.frame_layout_main, fragment)
-//                addToBackStack(null)
-//                commit()
-//            }
         supportFragmentManager.commit {
             add<FragmentMoviesDetails>(containerViewId = R.id.frame_layout_main, args = bundle)
             addToBackStack(null)

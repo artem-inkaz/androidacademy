@@ -13,8 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.androidacademy.data.Movie
 
 class MovieAdapterViewholder(
-        private var moviesclickListener: OnRecyclerMovieClickListener
-        ) : RecyclerView.Adapter<MovieViewHolder>() {
+        private var moviesclickListener: OnRecyclerMovieClickListener) : RecyclerView.Adapter<MovieViewHolder>() {
 
         private var moviesList= listOf<Movie>()
 
@@ -60,14 +59,12 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
                 .apply(imageOption)
                 .into(poster)
 
-   //    poster.setImageResource(movie.poster.toInt())
-   //     like.setImageResource(movie.like)
         ratings.rating = movie.ratings/2
         movieName.text = movie.title
         pgName.text = movie.minimumAge.toString()
-        reviewTV.text = "{movie.reviews} MIN"
+        reviewTV.text = ""+movie.reviews+" MIN"
         genres.text = movie.genres.joinToString(", ") { it.name }
-        runtime.text ="{movie.runtime} MIN"
+        runtime.text =" "+movie.runtime+" MIN"
     }
 
 }

@@ -53,11 +53,6 @@ class FragmentMoviesList :Fragment(){
         super.onAttach(context)
         changeFragment = context as? ChangeFragment
     }
-    override fun onStart() {
-       // updateData()
-        super.onStart()
-
-   }
 
     override fun onDetach() {
         super.onDetach()
@@ -73,25 +68,20 @@ class FragmentMoviesList :Fragment(){
     private fun updateData() {
         var moviesList: List<Movie>? = null
         scope.launch {
-        moviesList = loadMovies(requireContext())
-        (recycler?.adapter as? MovieAdapterViewholder)?.apply {
-        moviesList?.let { bindMovie(it) }
+            moviesList = loadMovies(requireContext())
+            (recycler?.adapter as? MovieAdapterViewholder)?.apply {
+            moviesList?.let { bindMovie(it) }
+            }
         }
-    }
     }
     private val moviesclickListener = object : OnRecyclerMovieClickListener {
         override fun onClick(movie: Movie) {
-//            recycler?.let { rv ->
-         //       Log.d("Parcel", "move.name = ${movie.title}")
+                Log.d("Parcel", "move.name = ${movie.title}")
                 changeFragment?.gotoFragmentMoviesDetails(movie)
-
-//          }
         }
     }
 
-
     companion object {
-//        fun create() = FragmentMoviesList()
         const val  GRID_LAYOUT_ROW_COUNT = 2
     }
 }
