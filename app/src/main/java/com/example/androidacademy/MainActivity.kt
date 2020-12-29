@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.example.androidacademy.data.Movie
-import com.example.androidacademy.ui.FragmentMoviesDetails
-import com.example.androidacademy.ui.FragmentMoviesList
+import com.example.androidacademy.moviesdetails.FragmentMoviesDetails
+import com.example.androidacademy.movieslist.FragmentMoviesList
 
 class MainActivity : AppCompatActivity(), ChangeFragment {
 

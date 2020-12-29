@@ -1,4 +1,4 @@
-package com.example.androidacademy.ui
+package com.example.androidacademy.moviesdetails
 
 
 import android.content.Context
@@ -24,6 +24,8 @@ class FragmentMoviesDetails :Fragment(){
 
     private var changeFragment: ChangeFragment? = null
     private lateinit var adapter: ActorAdapterViewholder
+
+
 
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,
                               savedInstanceState: Bundle?
