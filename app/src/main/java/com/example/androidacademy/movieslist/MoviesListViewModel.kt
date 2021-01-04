@@ -13,7 +13,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class FragmentMoviesViewModel(private val context: Context): ViewModel() {
+class MoviesListViewModel(private val context: Context) : ViewModel() {
 
     private val _state = MutableLiveData<State>(State.Init())
     val state: LiveData<State> get() = _state
@@ -25,19 +25,18 @@ class FragmentMoviesViewModel(private val context: Context): ViewModel() {
 //        updateData()
 //    }
 
-
     fun updateData() {
 
         viewModelScope.launch {
             try {
                 delay(3000)
                 _state.value = State.Loading()
-            val movieList = loadMovies(context)
-            _mutableLiveDataMovies.value = movieList
+                val movieList = loadMovies(context)
+                _mutableLiveDataMovies.value = movieList
                 _state.value = State.Success()
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 _state.value = State.Error()
-                Log.e(ViewModel::class.java.simpleName,"Error grab movies data ${e.message}")
+                Log.e(ViewModel::class.java.simpleName, "Error grab movies data ${e.message}")
             }
         }
     }

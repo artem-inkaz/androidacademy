@@ -15,18 +15,19 @@ import com.example.androidacademy.data.Movie
 class MovieAdapter(
         private var moviesclickListener: OnRecyclerMovieClickListener) : RecyclerView.Adapter<MovieViewHolder>() {
 
-        private var moviesList= listOf<Movie>()
+    private var moviesList = listOf<Movie>()
 
-    override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): MovieViewHolder = MovieViewHolder(LayoutInflater
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder = MovieViewHolder(LayoutInflater
             .from(parent.context)
             .inflate(R.layout.view_holder_movie, parent, false))
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-                holder.onBind(moviesList[position])
-                holder.itemView.setOnClickListener {
-                    moviesclickListener.onClick(moviesList[position])
-                }
+        holder.onBind(moviesList[position])
+        holder.itemView.setOnClickListener {
+            moviesclickListener.onClick(moviesList[position])
+        }
     }
+
     override fun getItemCount(): Int = moviesList.size
 
     fun bindMovie(newMoviesList: List<Movie>) {
@@ -35,13 +36,13 @@ class MovieAdapter(
     }
 }
 
-class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     companion object {
         private val imageOption = RequestOptions()
-            .placeholder(R.drawable.ic_combined_shape)
-            .fallback(R.drawable.ic_combined_shape)
-            .centerCrop()
+                .placeholder(R.drawable.ic_combined_shape)
+                .fallback(R.drawable.ic_combined_shape)
+                .centerCrop()
     }
 
     private val poster: ImageView = itemView.findViewById(R.id.movie_list_picture)
@@ -59,17 +60,17 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
                 .apply(imageOption)
                 .into(poster)
 
-        ratings.rating = movie.ratings/2
+        ratings.rating = movie.ratings / 2
         movieName.text = movie.title
         pgName.text = movie.minimumAge.toString()
-        reviewTV.text = ""+movie.reviews+" MIN"
+        reviewTV.text = "" + movie.reviews + " MIN"
         genres.text = movie.genres.joinToString(", ") { it.name }
-        runtime.text =" "+movie.runtime+" MIN"
+        runtime.text = " " + movie.runtime + " MIN"
     }
 
 }
 
-interface OnRecyclerMovieClickListener{
+interface OnRecyclerMovieClickListener {
     fun onClick(movie: Movie)
 }
 
