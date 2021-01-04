@@ -25,8 +25,6 @@ class FragmentMoviesDetails :Fragment(){
     private var changeFragment: ChangeFragment? = null
     private lateinit var adapter: ActorAdapterViewholder
 
-
-
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,
                               savedInstanceState: Bundle?
     ): View? {
@@ -59,25 +57,37 @@ class FragmentMoviesDetails :Fragment(){
         val overview = view.findViewById(R.id.story_descriptionTV) as TextView
         val cast = view.findViewById(R.id.castTV) as TextView
 
-        val bundle = arguments
-        if (arguments != null) {
-            val movie = bundle?.getParcelable<Movie>(Movie::class.java.simpleName)
-            Glide.with(requireContext())
-                .load(movie?.backdrop)
-                .apply(imageOption)
-                .into(backdrop)
+//        val bundle = arguments
+//        if (arguments != null) {
+//            val movie = bundle?.getParcelable<Movie>(Movie::class.java.simpleName)
+//            Glide.with(requireContext())
+//                .load(movie?.backdrop)
+//                .apply(imageOption)
+//                .into(backdrop)
 
-            title.text = movie?.title
-            //Вопрос: Почему тут ошибка?
-            //ratings.rating = movie?.(ratings / 2)
-            title.text = movie?.title
-            pgName.text = movie?.minimumAge.toString()
-            reviewTV.text = ""+movie?.reviews+" MIN"
-            genres.text = movie?.genres?.joinToString(", ") { it.name }
-            overview.text = movie?.overview
-            when {
-                movie?.actors?.isNotEmpty() == true -> (movie?.actors?.let { (recycler?.adapter as? ActorAdapterViewholder)?.bindActors(it) })
-                else -> cast.visibility = View.INVISIBLE
+            arguments?.getParcelable<Movie>(Movie::class.java.simpleName)?.let { movie ->
+                Glide.with(requireContext())
+                        .load(movie.backdrop)
+                        .apply(imageOption)
+                        .into(backdrop)
+
+            title.text = movie.title
+            ratings.rating = movie.ratings / 2
+            title.text = movie.title
+            pgName.text = movie.minimumAge.toString()
+            reviewTV.text = "" + movie.reviews + " MIN"
+            genres.text = movie.genres.joinToString(", ") { it.name }
+            overview.text = movie.overview
+//            when {
+//                movie?.actors?.isNotEmpty() == true -> (movie?.actors?.let { (recycler?.adapter as? ActorAdapterViewholder)?.bindActors(it) })
+//                else -> cast.visibility = View.INVISIBLE
+//            }
+            if (movie.actors.isNotEmpty()) {
+                 (recycler.adapter as ActorAdapterViewholder).bindActors(movie.actors)
+
+            } else {
+                 cast.visibility = View.INVISIBLE
+
             }
        }
     }
