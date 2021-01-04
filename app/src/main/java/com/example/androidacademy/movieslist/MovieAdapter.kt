@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.androidacademy.data.Movie
 
-class MovieAdapterViewholder(
+class MovieAdapter(
         private var moviesclickListener: OnRecyclerMovieClickListener) : RecyclerView.Adapter<MovieViewHolder>() {
 
         private var moviesList= listOf<Movie>()

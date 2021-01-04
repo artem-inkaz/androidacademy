@@ -14,10 +14,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidacademy.ChangeFragment
 import com.example.androidacademy.R
-import com.example.androidacademy.adapter.MovieAdapterViewholder
 import com.example.androidacademy.adapter.OnRecyclerMovieClickListener
 import com.example.androidacademy.data.Movie
 import com.example.androidacademy.State
+import com.example.androidacademy.adapter.MovieAdapter
 
 class FragmentMoviesList :Fragment(){
 
@@ -28,7 +28,8 @@ class FragmentMoviesList :Fragment(){
     private val viewModel: FragmentMoviesViewModel by viewModels { MoviesViewModelFactory(requireContext()) }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
        return inflater.inflate(R.layout.fragment_movies_list, container, false)
@@ -36,24 +37,24 @@ class FragmentMoviesList :Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-            recycler = view.findViewById(R.id.rv_movie_list)
-            recycler?.layoutManager = GridLayoutManager(activity, GRID_LAYOUT_ROW_COUNT)
-            recycler?.adapter = MovieAdapterViewholder(moviesclickListener)
+        recycler = view.findViewById(R.id.rv_movie_list)
+        recycler?.layoutManager = GridLayoutManager(activity, GRID_LAYOUT_ROW_COUNT)
+        recycler?.adapter = MovieAdapter(moviesclickListener)
 
-      setObservers()
+        setObservers()
 
     }
 
     override fun onStart() {
       super.onStart()
-      val viewModel = ViewModelProvider(this).get(FragmentMoviesViewModel::class.java)
-        viewModel.updateData()
+//      val viewModel = ViewModelProvider(this).get(FragmentMoviesViewModel::class.java)
+//        viewModel.updateData()
     }
 
     private fun setObservers() {
         // observe movies data
         viewModel.listMovies.observe(viewLifecycleOwner, { movieList ->
-            (recycler!!.adapter as MovieAdapterViewholder).apply {
+            (recycler!!.adapter as MovieAdapter).apply {
                 bindMovie(movieList)
             }
         })
