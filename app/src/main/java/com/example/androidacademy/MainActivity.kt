@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.example.androidacademy.data.Movie
-import com.example.androidacademy.ui.FragmentMoviesDetails
-import com.example.androidacademy.ui.FragmentMoviesList
+import com.example.androidacademy.moviesdetails.FragmentMoviesDetails
+import com.example.androidacademy.movieslist.FragmentMoviesList
 
 class MainActivity : AppCompatActivity(), ChangeFragment {
 
@@ -19,12 +19,12 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
         }
     }
 
-        // отображение фрагмента FragmentMoviesList.kt
-        private fun gotoFragmentMoviesList() {
+    // отображение фрагмента FragmentMoviesList.kt
+    private fun gotoFragmentMoviesList() {
 
-            supportFragmentManager.commit {
-                add<FragmentMoviesList>(R.id.frame_layout_main)
-            }
+        supportFragmentManager.commit {
+            add<FragmentMoviesList>(R.id.frame_layout_main)
+        }
     }
 
     // отображение фрагмента FragmentMoviesDetails.kt
@@ -38,8 +38,8 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
         }
     }
 
-       // Возвращаемся обратно
-       override fun backFragmentMoviesList() {
+    // Возвращаемся обратно
+    override fun backFragmentMoviesList() {
         supportFragmentManager.popBackStack()
     }
 }
