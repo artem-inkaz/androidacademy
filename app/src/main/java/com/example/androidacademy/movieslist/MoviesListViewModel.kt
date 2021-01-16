@@ -32,12 +32,7 @@ class MoviesListViewModel(private val apiService: MoviesApi) : ViewModel() {
 
         viewModelScope.launch {
             try {
-              //  delay(3000)
                 _state.value = State.Loading()
-//                _state.value = State.Loading()
-//                val movieList = loadMovies(context)
-//                _mutableLiveDataMovies.value = movieList
-//                _state.value = State.Success()
                 // get genres
                 val genres = apiService.getGenres()
                 // get movie

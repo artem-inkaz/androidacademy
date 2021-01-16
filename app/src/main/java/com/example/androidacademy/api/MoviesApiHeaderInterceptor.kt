@@ -27,7 +27,7 @@ class MoviesApiHeaderInterceptor : Interceptor {
 
         val request = originalRequest.newBuilder()
                 .url(originalHttpUrl)
-                .addHeader(API_KEY_HEADER, API_KEY)
+                .addHeader(API_KEY_HEADER, BuildConfig.API_KEY)
                 .build()
 
         return chain.proceed(request)

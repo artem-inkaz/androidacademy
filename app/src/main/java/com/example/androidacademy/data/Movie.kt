@@ -13,10 +13,8 @@ data class Movie(
     val backdrop: String,
     val ratings: Float,
     val adult: Boolean,
-  //  val minimumAge: Int,
     val runtime: Int?,
     val reviews: Int,
     val genres: List<String>,
- //   val actors: List<Actor>,
     val like: Boolean = false
 ) : Parcelable

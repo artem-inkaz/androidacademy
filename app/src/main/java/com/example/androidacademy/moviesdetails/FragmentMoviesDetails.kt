@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -26,9 +27,19 @@ class FragmentMoviesDetails :Fragment(){
     private var changeFragment: ChangeFragment? = null
     private lateinit var adapter: ActorAdapterViewholder
 
+    private var recycler : RecyclerView? =  null
+    // view model
+    private lateinit var viewModel: MoviesDetailsViewModel
+
+    private var movie: Movie? = null
+
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,
                               savedInstanceState: Bundle?
     ): View? {
+
+        val viewModelFactory = MoviesDetailViewModelFactory()
+        viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(MoviesDetailsViewModel::class.java)
 
         return inflater.inflate(R.layout.fragment_movie_details, container, false)
 
@@ -36,10 +47,9 @@ class FragmentMoviesDetails :Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val recycler: RecyclerView = view.findViewById(R.id.rv_foto_actors)
+       recycler = view.findViewById(R.id.rv_foto_actors)
         adapter = ActorAdapterViewholder()
-        recycler.layoutManager =
+        recycler?.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         recycler?.adapter = adapter
         var btnBack: TextView? = null
@@ -51,20 +61,10 @@ class FragmentMoviesDetails :Fragment(){
 
         val backdrop = view.findViewById(R.id.topmovieImage) as ImageView
         val title = view.findViewById(R.id.movieName) as TextView
-        val pgName = view.findViewById(R.id.pg_name) as TextView
         val reviewTV = view.findViewById(R.id.reviewTV) as TextView
         val genres = view.findViewById(R.id.tagLineTV) as TextView
         val ratings = view.findViewById(R.id.movieRatingBar) as RatingBar
         val overview = view.findViewById(R.id.story_descriptionTV) as TextView
-        val cast = view.findViewById(R.id.castTV) as TextView
-
-//        val bundle = arguments
-//        if (arguments != null) {
-//            val movie = bundle?.getParcelable<Movie>(Movie::class.java.simpleName)
-//            Glide.with(requireContext())
-//                .load(movie?.backdrop)
-//                .apply(imageOption)
-//                .into(backdrop)
 
             arguments?.getParcelable<Movie>(Movie::class.java.simpleName)?.let { movie ->
                 Glide.with(requireContext())
@@ -75,35 +75,29 @@ class FragmentMoviesDetails :Fragment(){
             title.text = movie.title
             ratings.rating = movie.ratings / 2
             title.text = movie.title
-        //    pgName.text = movie.minimumAge.toString()
             reviewTV.text = "" + movie.reviews + " MIN"
-        //    genres.text = movie.genres.joinToString(", ") { it.name }
             genres.text = movie.genres.joinToString(", ")
             overview.text = movie.overview
-//            when {
-//                movie?.actors?.isNotEmpty() == true -> (movie?.actors?.let { (recycler?.adapter as? ActorAdapterViewholder)?.bindActors(it) })
-//                else -> cast.visibility = View.INVISIBLE
-//            }
-//            if (actors.isNotEmpty()) {
-//                 (recycler.adapter as ActorAdapterViewholder).bindActors(movie.actors)
-//
-//            } else {
-//                 cast.visibility = View.INVISIBLE
-//
-//            }
-//                setActorsData(it)
-       }
+
+        }
+        setObservers()
+
+        movie?.let {
+            viewModel.getActors(it.id)
+        }
+    }
+
+    private fun setObservers() {
+        // observe actors data
+        viewModel.actors.observe(viewLifecycleOwner, {
+            setActorsData(it)
+        })
     }
 
     private fun setActorsData(actors: List<Actor>) {
-        val recycler: RecyclerView = requireView().findViewById(R.id.rv_foto_actors)
-        val cast = view?.findViewById(R.id.castTV) as TextView
+
         if (actors.isNotEmpty()) {
-            (recycler.adapter as ActorAdapterViewholder).bindActors(actors)
-
-        } else {
-            cast.visibility = View.INVISIBLE
-
+            (recycler?.adapter as ActorAdapterViewholder).bindActors(actors)
         }
     }
 
