@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.androidacademy.ChangeFragment
 import com.example.androidacademy.R
 import com.example.androidacademy.adapter.ActorAdapterViewholder
+import com.example.androidacademy.data.Actor
 import com.example.androidacademy.data.Movie
 
 
@@ -74,22 +75,36 @@ class FragmentMoviesDetails :Fragment(){
             title.text = movie.title
             ratings.rating = movie.ratings / 2
             title.text = movie.title
-            pgName.text = movie.minimumAge.toString()
+        //    pgName.text = movie.minimumAge.toString()
             reviewTV.text = "" + movie.reviews + " MIN"
-            genres.text = movie.genres.joinToString(", ") { it.name }
+        //    genres.text = movie.genres.joinToString(", ") { it.name }
+            genres.text = movie.genres.joinToString(", ")
             overview.text = movie.overview
 //            when {
 //                movie?.actors?.isNotEmpty() == true -> (movie?.actors?.let { (recycler?.adapter as? ActorAdapterViewholder)?.bindActors(it) })
 //                else -> cast.visibility = View.INVISIBLE
 //            }
-            if (movie.actors.isNotEmpty()) {
-                 (recycler.adapter as ActorAdapterViewholder).bindActors(movie.actors)
-
-            } else {
-                 cast.visibility = View.INVISIBLE
-
-            }
+//            if (actors.isNotEmpty()) {
+//                 (recycler.adapter as ActorAdapterViewholder).bindActors(movie.actors)
+//
+//            } else {
+//                 cast.visibility = View.INVISIBLE
+//
+//            }
+//                setActorsData(it)
        }
+    }
+
+    private fun setActorsData(actors: List<Actor>) {
+        val recycler: RecyclerView = requireView().findViewById(R.id.rv_foto_actors)
+        val cast = view?.findViewById(R.id.castTV) as TextView
+        if (actors.isNotEmpty()) {
+            (recycler.adapter as ActorAdapterViewholder).bindActors(actors)
+
+        } else {
+            cast.visibility = View.INVISIBLE
+
+        }
     }
 
     override fun onAttach(context: Context) {

@@ -25,6 +25,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+            buildConfigField "String", "BASE_IMAGE_URL", "\"https://image.tmdb.org/t/p/w300\""
+
+            // If you decide to play with this app more than a few times,
+            // please, create your own api key, so this one does not get banned:
+            // https://www.themoviedb.org/documentation/api
+            buildConfigField "String", "API_KEY", "\"3847095cad8449ec1b9ca6240fa9102c\""
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -34,7 +43,11 @@ android {
         jvmTarget = '1.8'
     }
 }
-
+ext {
+    versions = [
+            gson: "2.8.6"
+    ]
+}
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -64,7 +77,10 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    implementation "com.squareup.retrofit2:converter-gson:2.7.2"
     implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
     //Coil for Image download
     implementation 'io.coil-kt:coil:1.1.0'
+
+    implementation "com.google.code.gson:gson:2.8.6"
 }

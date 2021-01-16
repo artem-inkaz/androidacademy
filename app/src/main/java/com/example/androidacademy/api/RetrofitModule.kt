@@ -3,6 +3,7 @@ package com.example.androidacademy.api
 import com.example.androidacademy.BuildConfig
 import com.example.androidacademy.data.Movie
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -29,11 +30,11 @@ object RetrofitModule {
     private val json = Json {
         ignoreUnknownKeys = true
     }
-
+    @ExperimentalSerializationApi
     @Suppress("EXPERIMENTAL_API_USAGE")
-    private val retrofit: Retrofit = Retrofit.Builder()
+    val retrofit: Retrofit = Retrofit.Builder()
             .client(client)
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
 

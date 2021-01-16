@@ -8,14 +8,30 @@
     android:layout_height="match_parent"
     android:background="@color/background_movies_list" >
 
-        <ImageView
-            android:id="@+id/top_menu_bg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/top_menu_bg" />
+
+
+    <ImageView
+        android:id="@+id/top_menu_bg"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="44dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/searchInput"
+        style="@style/Widget.AppCompat.EditText"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/movies_list"
+        android:textColorHint="@color/movies_list"
+        android:text="Movies list"
+        app:layout_constraintStart_toEndOf="@id/imgView_list_head"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imgView_list_head"
@@ -27,21 +43,8 @@
         app:layout_constraintTop_toTopOf="@id/top_menu_bg"
         app:srcCompat="@drawable/ic_combined_shape" />
 
-        <TextView
-            android:id="@+id/movies_list"
-            android:layout_width="200dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/roboto_bold"
-            android:gravity="center_horizontal|left"
-            android:lineSpacingExtra="2sp"
-            android:text="Movies list"
-            android:textColor="@color/movies_list"
-            app:layout_constraintBottom_toBottomOf="@id/top_menu_bg"
-            app:layout_constraintStart_toEndOf="@id/imgView_list_head"
-            app:layout_constraintTop_toTopOf="@id/top_menu_bg"
-            app:layout_constraintVertical_bias="1.0" />
+
+
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -55,8 +58,10 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_menu_bg" />
+        app:layout_constraintTop_toBottomOf="@id/top_menu_bg"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -70,5 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_menu_bg" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

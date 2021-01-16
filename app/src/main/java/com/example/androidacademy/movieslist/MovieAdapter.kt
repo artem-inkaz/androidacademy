@@ -62,9 +62,10 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         ratings.rating = movie.ratings / 2
         movieName.text = movie.title
-        pgName.text = movie.minimumAge.toString()
+        //pgName.text = movie.minimumAge.toString()
         reviewTV.text = "" + movie.reviews + " MIN"
-        genres.text = movie.genres.joinToString(", ") { it.name }
+      //  genres.text = movie.genres.joinToString(", ") { it.name }
+        genres.text = movie.genres.joinToString(", ")
         runtime.text = " " + movie.runtime + " MIN"
     }
 
