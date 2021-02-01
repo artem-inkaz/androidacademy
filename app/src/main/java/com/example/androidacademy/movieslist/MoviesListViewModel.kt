@@ -11,12 +11,10 @@ import com.example.androidacademy.api.MoviesApi
 import com.example.androidacademy.api.convertMovieDtoToDomain
 import com.example.androidacademy.data.Movie
 import com.example.androidacademy.db.entities.MoviesRepository
-//import com.example.androidacademy.data.loadMovies
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.*
 import java.lang.Exception
 
-//class MoviesListViewModel(private val context: Context) : ViewModel() {
 class MoviesListViewModel(
     private val apiService: MoviesApi,
     private val repository: MoviesRepository
@@ -28,12 +26,6 @@ class MoviesListViewModel(
     private val _movies = MutableLiveData<List<Movie>>()
     val movies: LiveData<List<Movie>> get() = _movies
 
-//    private val _mutableLiveDataMovies = MutableLiveData<List<Movie>>(emptyList())
-//    val listMovies: LiveData<List<Movie>> get() = _mutableLiveDataMovies
-
-//    init {
-//        updateData()
-//    }
     fun loadMovies() {
         loadMoviesFromDb()
         loadMoviesFromApi()

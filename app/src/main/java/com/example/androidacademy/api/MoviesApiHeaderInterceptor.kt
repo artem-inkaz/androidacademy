@@ -15,8 +15,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
-private const val API_KEY = "3847095cad8449ec1b9ca6240fa9102c"
-private const val BASE_URL = "https://api.themoviedb.org/3/"
 private const val API_KEY_HEADER = "x-api-key"
 
 

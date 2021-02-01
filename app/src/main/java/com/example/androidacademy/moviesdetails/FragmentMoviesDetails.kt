@@ -83,12 +83,13 @@ class FragmentMoviesDetails :Fragment(){
             genres.text = movie.genres.joinToString(", ")
             overview.text = movie.overview
 
+                movie?.let {
+                    viewModel.getActors(it.id)
+                }
         }
         setObservers()
 
-        movie?.let {
-            viewModel.getActors(it.id)
-        }
+
     }
 
     private fun setObservers() {

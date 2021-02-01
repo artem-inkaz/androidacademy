@@ -10,13 +10,6 @@ import retrofit2.http.Query
  */
 interface MoviesApi {
 
-  @GET("search/movie")
-  suspend fun searchMovie(
-      @Query("api_key") apiKey: String,
-      @Query("query") query: String,
-      @Query("page") page: Int = 1
-  ): SearchMovieResponse
-
   @GET("genre/movie/list")
   suspend fun getGenres(@Query("api_key") key: String = BuildConfig.API_KEY): GenresDto
 
