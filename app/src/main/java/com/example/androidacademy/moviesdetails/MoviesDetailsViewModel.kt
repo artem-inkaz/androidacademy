@@ -22,11 +22,13 @@ class MoviesDetailsViewModel(
     val actors: LiveData<List<Actor>> get() = _actors
 
     fun getActors(movieId: Int) {
+        viewModelScope.launch {
         loadActorsFromDb(movieId)
         loadActorsFromApi(movieId)
+        }
     }
 
-    fun loadActorsFromApi(movieId: Int) {
+    private suspend  fun loadActorsFromApi(movieId: Int) {
         viewModelScope.launch {
             try {
                 // get actors
@@ -50,7 +52,7 @@ class MoviesDetailsViewModel(
         }
     }
 
-    private fun saveActorsLocally(movieId: Int) {
+    private suspend fun saveActorsLocally(movieId: Int) {
         if (!actors.value.isNullOrEmpty()) {
             viewModelScope.launch {
                 repository.rewriteActorsByMovieIntoDB(actors.value!!, movieId)
@@ -58,7 +60,7 @@ class MoviesDetailsViewModel(
         }
     }
 
-    private fun loadActorsFromDb(movieId: Int) {
+    private suspend fun loadActorsFromDb(movieId: Int) {
         viewModelScope.launch {
             try {
                 // load actors from database

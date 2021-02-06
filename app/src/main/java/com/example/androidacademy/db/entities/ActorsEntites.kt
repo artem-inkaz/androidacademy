@@ -1,7 +1,7 @@
 package com.example.androidacademy.db.entities
 
 import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
+
 @Entity(
     tableName = DbContract.ActorContract.TABLE_NAME,
     foreignKeys = [ForeignKey(
