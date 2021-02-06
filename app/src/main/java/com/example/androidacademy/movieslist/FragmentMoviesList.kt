@@ -24,7 +24,6 @@ class FragmentMoviesList : Fragment() {
     private var recycler: RecyclerView? = null
     private var progressBar: ProgressBar? = null
     private var changeFragment: ChangeFragment? = null
-
     private val viewModel: MoviesListViewModel by viewModels { MoviesViewModelFactory() }
 
     override fun onCreateView(
@@ -60,7 +59,6 @@ class FragmentMoviesList : Fragment() {
                 bindMovie(movieList)
             }
         })
-
         // observe status
         viewModel.state.observe(viewLifecycleOwner, { status ->
             when (status) {
@@ -93,7 +91,6 @@ class FragmentMoviesList : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         changeFragment = null
-
     }
 
     private val moviesclickListener = object : OnRecyclerMovieClickListener {

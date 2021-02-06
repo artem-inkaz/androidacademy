@@ -13,8 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.androidacademy.data.Movie
 
 class MovieAdapter(
-        private var moviesclickListener: OnRecyclerMovieClickListener) : RecyclerView.Adapter<MovieViewHolder>() {
-
+    private var moviesclickListener: OnRecyclerMovieClickListener) : RecyclerView.Adapter<MovieViewHolder>() {
     private var moviesList = listOf<Movie>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder = MovieViewHolder(LayoutInflater
@@ -52,7 +51,6 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val runtime: TextView = itemView.findViewById(R.id.txtView_time)
     private val ratings: RatingBar = itemView.findViewById(R.id.movieRatingBar)
 
-
     fun onBind(movie: Movie) {
         Glide.with(itemView.context)
                 .load(movie.poster)
@@ -65,7 +63,6 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         genres.text = movie.genres.joinToString(", ")
         runtime.text = " ${movie.runtime} MIN"
     }
-
 }
 
 interface OnRecyclerMovieClickListener {

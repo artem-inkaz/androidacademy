@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.androidacademy.ChangeFragment
 import com.example.androidacademy.R
@@ -22,30 +21,24 @@ import com.example.androidacademy.adapter.ActorAdapterViewholder
 import com.example.androidacademy.data.Actor
 import com.example.androidacademy.data.Movie
 
-
 class FragmentMoviesDetails :Fragment(){
 
     private var changeFragment: ChangeFragment? = null
     private lateinit var adapter: ActorAdapterViewholder
-
     private var recycler : RecyclerView? =  null
     // view model
     private lateinit var viewModel: MoviesDetailsViewModel
-
     private var movie: Movie? = null
 
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,
                               savedInstanceState: Bundle?
     ): View? {
-
       //  movie = FragmentMoviesDetailsArgs.fromBundle(requireArguments()).selectedMovie
-
         val viewModelFactory = MoviesDetailViewModelFactory()
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(MoviesDetailsViewModel::class.java)
 
         return inflater.inflate(R.layout.fragment_movie_details, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,7 +48,6 @@ class FragmentMoviesDetails :Fragment(){
         recycler?.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         recycler?.adapter = adapter
-
         var btnBack: TextView? = null
         btnBack = view.findViewById<TextView>(R.id.back_text).apply {
             setOnClickListener {
@@ -88,8 +80,6 @@ class FragmentMoviesDetails :Fragment(){
                 }
         }
         setObservers()
-
-
     }
 
     private fun setObservers() {
@@ -114,7 +104,6 @@ class FragmentMoviesDetails :Fragment(){
     override fun onDetach() {
         super.onDetach()
         changeFragment = null
-
     }
 
     companion object {
@@ -123,6 +112,5 @@ class FragmentMoviesDetails :Fragment(){
             .fallback(R.drawable.ic_combined_shape)
             .centerCrop()
     }
-
 }
 
