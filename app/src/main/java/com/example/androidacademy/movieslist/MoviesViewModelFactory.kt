@@ -7,7 +7,6 @@ import com.example.androidacademy.repositories.RepositoryHolder
 import kotlinx.serialization.ExperimentalSerializationApi
 import retrofit2.create
 
-
 class MoviesViewModelFactory : ViewModelProvider.Factory {
     @ExperimentalSerializationApi
     @Suppress("UNCHECKED_CAST")

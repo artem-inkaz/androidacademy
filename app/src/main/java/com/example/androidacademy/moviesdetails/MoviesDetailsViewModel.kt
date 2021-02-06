@@ -16,19 +16,19 @@ import java.lang.Exception
 class MoviesDetailsViewModel(
     private val apiService: MoviesApi,
     private val repository: MoviesRepositoryImpl
-    ) : ViewModel() {
+) : ViewModel() {
 
     private val _actors = MutableLiveData<List<Actor>>()
     val actors: LiveData<List<Actor>> get() = _actors
 
     fun getActors(movieId: Int) {
         viewModelScope.launch {
-        loadActorsFromDb(movieId)
-        loadActorsFromApi(movieId)
+            loadActorsFromDb(movieId)
+            loadActorsFromApi(movieId)
         }
     }
 
-    private suspend  fun loadActorsFromApi(movieId: Int) {
+    private suspend fun loadActorsFromApi(movieId: Int) {
         viewModelScope.launch {
             try {
                 // get actors

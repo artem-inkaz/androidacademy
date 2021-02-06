@@ -27,9 +27,9 @@ class FragmentMoviesList : Fragment() {
     private val viewModel: MoviesListViewModel by viewModels { MoviesViewModelFactory() }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_movies_list, container, false)
     }

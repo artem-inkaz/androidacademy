@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
             backgroundRequests.periodicRequestCoroutine
         )
     }
+
     // отображение фрагмента FragmentMoviesList.kt
     private fun gotoFragmentMoviesList() {
 
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
             add<FragmentMoviesList>(R.id.frame_layout_main)
         }
     }
+
     // отображение фрагмента FragmentMoviesDetails.kt
     override fun gotoFragmentMoviesDetails(movie: Movie) {
         val bundle = Bundle().apply {
@@ -47,11 +49,9 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
             addToBackStack(null)
         }
     }
+
     // Возвращаемся обратно
     override fun backFragmentMoviesList() {
         supportFragmentManager.popBackStack()
     }
-
-
-
 }

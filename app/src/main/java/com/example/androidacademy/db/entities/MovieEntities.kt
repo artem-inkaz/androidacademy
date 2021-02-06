@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = DbContract.MovieContract.TABLE_NAME)
-data class MovieEntities (
+data class MovieEntities(
     @PrimaryKey
     @ColumnInfo(name = DbContract.MovieContract.COLUMN_NAME_ID)
     val id: Long,
@@ -19,4 +19,4 @@ data class MovieEntities (
     val reviews: Int,
     val genres: String,
     val like: Boolean = false
-    )
+)

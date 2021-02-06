@@ -18,5 +18,4 @@ class MoviesDetailViewModelFactory : ViewModelProvider.Factory {
         )
         else -> throw IllegalArgumentException("$modelClass is not registered ViewModel")
     } as T
-
 }

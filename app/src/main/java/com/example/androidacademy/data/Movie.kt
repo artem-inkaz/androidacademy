@@ -3,7 +3,6 @@ package com.example.androidacademy.data
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-
 @Parcelize
 data class Movie(
     val id: Int,

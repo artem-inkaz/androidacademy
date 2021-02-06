@@ -19,12 +19,13 @@ class ActorAdapterViewholder : RecyclerView.Adapter<ActorViewHolder>() {
         ActorViewHolder(
             LayoutInflater
                 .from(parent.context)
-                .inflate(R.layout.view_holder_actor, parent, false))
+                .inflate(R.layout.view_holder_actor, parent, false)
+        )
 
     override fun onBindViewHolder(holder: ActorViewHolder, position: Int) {
-            holder.onBind(actorsList[position])
-            holder.itemView.setOnClickListener {
-            }
+        holder.onBind(actorsList[position])
+        holder.itemView.setOnClickListener {
+        }
     }
 
     override fun getItemCount(): Int = actorsList.size
@@ -35,7 +36,7 @@ class ActorAdapterViewholder : RecyclerView.Adapter<ActorViewHolder>() {
     }
 }
 
-class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     companion object {
         private val imageOption = RequestOptions()
@@ -55,7 +56,6 @@ class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         txtViewActorName?.text = actor.name
     }
-
 }
 
 

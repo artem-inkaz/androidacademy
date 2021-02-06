@@ -32,7 +32,6 @@ class UpdateMovieWorker(
                 if (!movies.isNullOrEmpty()) {
                     repository.rewriteMoviesListIntoDB(movies)
                 }
-
                 Result.success()
             } catch (e: Exception) {
                 Result.failure()
