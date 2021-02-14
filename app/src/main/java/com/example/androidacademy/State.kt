@@ -1,8 +1,9 @@
 package com.example.androidacademy
 
 sealed class State {
-    class Init : State()
-    class Loading : State()
-    class Error : State()
-    class Success : State()
+    object Init : State()
+    object Loading : State()
+    object Error : State()
+    object EmptyDataSet : State()
+    object Success : State()
 }

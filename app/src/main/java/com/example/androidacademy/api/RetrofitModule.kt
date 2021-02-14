@@ -23,8 +23,8 @@ private const val API_KEY_HEADER = "x-api-key"
 
 object RetrofitModule {
     private val client = OkHttpClient().newBuilder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .addInterceptor(MoviesApiHeaderInterceptor())
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
 
     private val json = Json {
@@ -37,6 +37,4 @@ object RetrofitModule {
             .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
-
-    val moviesApi: MoviesApiService = retrofit.create(MoviesApiService::class.java)
 }

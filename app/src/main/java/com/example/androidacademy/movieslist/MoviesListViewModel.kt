@@ -10,29 +10,35 @@ import com.example.androidacademy.State
 import com.example.androidacademy.api.MoviesApi
 import com.example.androidacademy.api.convertMovieDtoToDomain
 import com.example.androidacademy.data.Movie
-//import com.example.androidacademy.data.loadMovies
+import com.example.androidacademy.db.entities.MoviesRepository
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.lang.Exception
 
-//class MoviesListViewModel(private val context: Context) : ViewModel() {
-class MoviesListViewModel(private val apiService: MoviesApi) : ViewModel() {
+class MoviesListViewModel(
+    private val apiService: MoviesApi,
+    private val repository: MoviesRepository
+) : ViewModel() {
 
-    private val _state = MutableLiveData<State>(State.Init())
+    private val _state = MutableLiveData<State>(State.Init)
     val state: LiveData<State> get() = _state
 
-    private val _mutableLiveDataMovies = MutableLiveData<List<Movie>>(emptyList())
-    val listMovies: LiveData<List<Movie>> get() = _mutableLiveDataMovies
+    private val _movies = MutableLiveData<List<Movie>>()
+    val movies: LiveData<List<Movie>> get() = _movies
 
-//    init {
-//        updateData()
-//    }
+    fun loadMovies() {
+        loadMoviesFromDb()
+        loadMoviesFromApi()
+    }
 
-    fun updateData() {
-
+    private fun loadMoviesFromApi() {
         viewModelScope.launch {
             try {
-                _state.value = State.Loading()
+                // if we got movies from db - don't change state
+                if (state.value != State.Success) {
+                    _state.value = State.Loading
+                }
+
                 // get genres
                 val genres = apiService.getGenres()
                 // get movie
@@ -40,16 +46,61 @@ class MoviesListViewModel(private val apiService: MoviesApi) : ViewModel() {
                 // get movie domain data
                 val movies = convertMovieDtoToDomain(moviesDto.results, genres.genres)
 
-                _mutableLiveDataMovies.value = movies
-                _state.value = State.Success()
+                _movies.value = movies
+                _state.value = State.Success
+
+                // don't rewrite with empty data
+                if (!movies.isNullOrEmpty()) {
+                    saveMoviesLocally()
+                }
 
             } catch (e: Exception) {
-                _state.value = State.Error()
-                Log.e(ViewModel::class.java.simpleName, "Error grab movies data ${e.message}")
+                // if we didn't receive data from DB before - show error connection
+                if (state.value != State.Success) {
+                    _state.value = State.Error
+                }
+                // log error anyway
+                Log.e(
+                    MoviesListViewModel::class.java.simpleName,
+                    "Error grab movies data from API: ${e.message}"
+                )
             }
         }
     }
 
+    private fun saveMoviesLocally() {
+        if (!movies.value.isNullOrEmpty()) {
+            viewModelScope.launch {
+                repository.rewriteMoviesListIntoDB(movies.value!!)
+            }
+        }
+    }
+
+    private fun loadMoviesFromDb() {
+        viewModelScope.launch {
+            try {
+                _state.value = State.Loading
+
+                // load movies from database
+                val moviesDB = repository.getAllMovies()
+
+                // if there are any movies - show them and show success state
+                if (moviesDB.isNotEmpty()) {
+                    _movies.value = moviesDB
+                    _state.value = State.Success
+                } else {
+                    _state.value = State.EmptyDataSet
+                }
+
+            } catch (e: Exception) {
+                _state.value = State.EmptyDataSet
+                Log.e(
+                    MoviesListViewModel::class.java.simpleName,
+                    "Error grab movies data from DB: ${e.message}"
+                )
+            }
+        }
+    }
 
 }
 

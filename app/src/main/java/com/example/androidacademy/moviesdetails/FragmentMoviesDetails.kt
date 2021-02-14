@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.androidacademy.ChangeFragment
 import com.example.androidacademy.R
@@ -37,6 +38,8 @@ class FragmentMoviesDetails :Fragment(){
                               savedInstanceState: Bundle?
     ): View? {
 
+      //  movie = FragmentMoviesDetailsArgs.fromBundle(requireArguments()).selectedMovie
+
         val viewModelFactory = MoviesDetailViewModelFactory()
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(MoviesDetailsViewModel::class.java)
@@ -52,6 +55,7 @@ class FragmentMoviesDetails :Fragment(){
         recycler?.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         recycler?.adapter = adapter
+
         var btnBack: TextView? = null
         btnBack = view.findViewById<TextView>(R.id.back_text).apply {
             setOnClickListener {
@@ -79,12 +83,13 @@ class FragmentMoviesDetails :Fragment(){
             genres.text = movie.genres.joinToString(", ")
             overview.text = movie.overview
 
+                movie?.let {
+                    viewModel.getActors(it.id)
+                }
         }
         setObservers()
 
-        movie?.let {
-            viewModel.getActors(it.id)
-        }
+
     }
 
     private fun setObservers() {

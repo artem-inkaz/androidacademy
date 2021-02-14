@@ -1,6 +1,7 @@
 package com.example.androidacademy.movieslist
 
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -42,16 +43,19 @@ class FragmentMoviesList : Fragment() {
 
         setObservers()
 
+        if (viewModel.movies.value.isNullOrEmpty()) {   // to avoid unnecessary request, when we came back from the detail screen
+            viewModel.loadMovies()
+        }
     }
 
     override fun onStart() {
         super.onStart()
-        viewModel.updateData()
+        viewModel.loadMovies()
     }
 
     private fun setObservers() {
         // observe movies data
-        viewModel.listMovies.observe(viewLifecycleOwner, { movieList ->
+        viewModel.movies.observe(viewLifecycleOwner, { movieList ->
             (recycler!!.adapter as MovieAdapter).apply {
                 bindMovie(movieList)
             }
@@ -67,6 +71,9 @@ class FragmentMoviesList : Fragment() {
                     progressBar?.visibility = View.VISIBLE
                 }
                 is State.Error -> {
+                    progressBar?.visibility = View.INVISIBLE
+                }
+                State.EmptyDataSet -> {
                     progressBar?.visibility = View.INVISIBLE
                 }
             }
@@ -95,6 +102,13 @@ class FragmentMoviesList : Fragment() {
             changeFragment?.gotoFragmentMoviesDetails(movie)
         }
     }
+
+    /** calculate grid's columns number */
+    private fun getSpanCount() =
+        when (resources.configuration.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> 3
+            else -> 2
+        }
 
     companion object {
         const val GRID_LAYOUT_ROW_COUNT = 2
