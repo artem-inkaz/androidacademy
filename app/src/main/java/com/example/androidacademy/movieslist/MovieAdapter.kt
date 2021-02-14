@@ -47,12 +47,11 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val poster: ImageView = itemView.findViewById(R.id.movie_list_picture)
     private val movieName: TextView = itemView.findViewById(R.id.movieName)
-    private val pgName: TextView = itemView.findViewById(R.id.pg_name)
     private val reviewTV: TextView = itemView.findViewById(R.id.reviewTV)
     private val genres: TextView = itemView.findViewById(R.id.tagLineTV)
     private val runtime: TextView = itemView.findViewById(R.id.txtView_time)
     private val ratings: RatingBar = itemView.findViewById(R.id.movieRatingBar)
-    private val like: ImageView = itemView.findViewById(R.id.imgView_like)
+
 
     fun onBind(movie: Movie) {
         Glide.with(itemView.context)
@@ -62,10 +61,9 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         ratings.rating = movie.ratings / 2
         movieName.text = movie.title
-        pgName.text = movie.minimumAge.toString()
         reviewTV.text = "" + movie.reviews + " MIN"
-        genres.text = movie.genres.joinToString(", ") { it.name }
-        runtime.text = " " + movie.runtime + " MIN"
+        genres.text = movie.genres.joinToString(", ")
+        runtime.text = " ${movie.runtime} MIN"
     }
 
 }

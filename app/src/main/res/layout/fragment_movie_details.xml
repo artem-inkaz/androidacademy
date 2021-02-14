@@ -180,6 +180,7 @@
             android:fontFamily="@font/roboto_bold"
             android:text="@string/cast"
             android:textColor="@color/castTV"
+            android:visibility="visible"
             app:layout_constraintStart_toEndOf="@id/guideline"
             app:layout_constraintTop_toBottomOf="@id/story_descriptionTV" />
 
