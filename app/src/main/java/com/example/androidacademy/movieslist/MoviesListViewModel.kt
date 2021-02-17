@@ -25,6 +25,7 @@ class MoviesListViewModel(
 
     fun loadMovies() {
         viewModelScope.launch {
+            _state.value = State.Loading
             loadMoviesFromDb()
             loadMoviesFromApi()
         }
@@ -50,7 +51,8 @@ class MoviesListViewModel(
 
                 // don't rewrite with empty data
                 if (!movies.isNullOrEmpty()) {
-                    saveMoviesLocally()
+ //                   saveMoviesLocally()
+                repository.rewriteMoviesListIntoDB(movies)
                 }
 
             } catch (e: Exception) {

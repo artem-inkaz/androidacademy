@@ -1,6 +1,7 @@
 package com.example.androidacademy.db.entities
 
 import androidx.room.*
+import androidx.room.ForeignKey.CASCADE
 
 @Entity(
     tableName = DbContract.ActorContract.TABLE_NAME,
@@ -8,7 +9,7 @@ import androidx.room.*
         entity = MovieEntities::class,
         parentColumns = arrayOf(DbContract.MovieContract.COLUMN_NAME_ID),
         childColumns = arrayOf(DbContract.ActorContract.COLUMN_NAME_MOVIE_ID),
-        onDelete = ForeignKey.CASCADE
+        onDelete = CASCADE
     )],
     indices = [Index(value = [DbContract.ActorContract.COLUMN_NAME_MOVIE_ID])]
 )

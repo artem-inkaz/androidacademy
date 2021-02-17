@@ -1,7 +1,9 @@
 package com.example.androidacademy
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.example.androidacademy.backgroundworkmanager.UpdateMovieWorkerRequest
@@ -11,10 +13,15 @@ import com.example.androidacademy.movieslist.FragmentMoviesList
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.WorkManager
 import com.example.androidacademy.backgroundworkmanager.UpdateMovieWorkerRequest.Companion.WORKER_MOVIE_UPDATE_NAME
+import com.example.androidacademy.notifiactions.MovieNotifications
 
 class MainActivity : AppCompatActivity(), ChangeFragment {
 
     private val backgroundRequests = UpdateMovieWorkerRequest()
+
+    // view model
+    private val viewModel: MainActivityViewModel by viewModels { MainActivityViewModelFactory() }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +29,7 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
 
         if (savedInstanceState == null) {
             gotoFragmentMoviesList()
+            intent?.let(::handleIntent)
         }
 
         WorkManager.getInstance(App.context()).enqueueUniquePeriodicWork(
@@ -53,5 +61,23 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
     // Возвращаемся обратно
     override fun backFragmentMoviesList() {
         supportFragmentManager.popBackStack()
+    }
+
+    private fun handleIntent(intent: Intent) {
+        when (intent.action) {
+            Intent.ACTION_VIEW -> {
+                val id = intent.data?.lastPathSegment?.toLongOrNull()
+                if (id != null) {
+//
+                    // dismissNotification
+                    // bad decision?
+                    val notifications = MovieNotifications(App.context())
+                    notifications.initialize()
+                    notifications.dismissNotification(id)
+                }
+            }
+            // first start
+            else -> viewModel.startBackgroundMovieCheck()
+        }
     }
 }
