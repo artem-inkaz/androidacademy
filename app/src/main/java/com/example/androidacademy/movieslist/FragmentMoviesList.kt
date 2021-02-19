@@ -40,6 +40,7 @@ class FragmentMoviesList : Fragment() {
         recycler?.layoutManager = GridLayoutManager(activity, GRID_LAYOUT_ROW_COUNT)
         recycler?.adapter = MovieAdapter(moviesclickListener)
 
+        // watch for LiveData
         setObservers()
 
         if (viewModel.movies.value.isNullOrEmpty()) {   // to avoid unnecessary request, when we came back from the detail screen

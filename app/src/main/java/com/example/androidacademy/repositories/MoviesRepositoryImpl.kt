@@ -10,7 +10,7 @@ interface MoviesRepository {
     suspend fun getAllMovies(): List<Movie>
     suspend fun writeMovieIntoDB(movie: Movie)
     suspend fun rewriteMoviesListIntoDB(movies: List<Movie>)
-
+    suspend fun getMovieById(id: Long): Movie?
     /* actors */
     suspend fun getAllActorsByMovie(movieId: Int): List<Actor>
     suspend fun rewriteActorsByMovieIntoDB(actors: List<Actor>, movieId: Int)
@@ -48,6 +48,15 @@ class MoviesRepositoryImpl : MoviesRepository {
             moviesDB.actorsDao().deleteByMovieId(movieId)
             moviesDB.actorsDao().insertAll(actors.map { toActorEntity(it, movieId) })
         }
+
+    /** get concrete movie */
+    override suspend fun getMovieById(id: Long): Movie? = withContext(Dispatchers.IO) {
+        val movie = moviesDB.moviesDao().getMovie(id)
+
+        if (movie != null){
+            toMovieDomain(movie)
+        } else null
+    }
 
     private fun toActorDomain(actorEntity: ActorsEntites) = Actor(
         id = actorEntity.actorId,
