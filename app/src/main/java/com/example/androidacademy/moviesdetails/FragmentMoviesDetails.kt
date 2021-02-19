@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.androidacademy.ChangeFragment
 import com.example.androidacademy.R
@@ -22,40 +21,35 @@ import com.example.androidacademy.adapter.ActorAdapterViewholder
 import com.example.androidacademy.data.Actor
 import com.example.androidacademy.data.Movie
 
-
-class FragmentMoviesDetails :Fragment(){
+class FragmentMoviesDetails : Fragment() {
 
     private var changeFragment: ChangeFragment? = null
     private lateinit var adapter: ActorAdapterViewholder
+    private var recycler: RecyclerView? = null
 
-    private var recycler : RecyclerView? =  null
     // view model
     private lateinit var viewModel: MoviesDetailsViewModel
-
     private var movie: Movie? = null
 
-    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,
-                              savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-
-      //  movie = FragmentMoviesDetailsArgs.fromBundle(requireArguments()).selectedMovie
-
+        //  movie = FragmentMoviesDetailsArgs.fromBundle(requireArguments()).selectedMovie
         val viewModelFactory = MoviesDetailViewModelFactory()
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(MoviesDetailsViewModel::class.java)
 
         return inflater.inflate(R.layout.fragment_movie_details, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       recycler = view.findViewById(R.id.rv_foto_actors)
+        recycler = view.findViewById(R.id.rv_foto_actors)
         adapter = ActorAdapterViewholder()
         recycler?.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         recycler?.adapter = adapter
-
         var btnBack: TextView? = null
         btnBack = view.findViewById<TextView>(R.id.back_text).apply {
             setOnClickListener {
@@ -70,11 +64,11 @@ class FragmentMoviesDetails :Fragment(){
         val ratings = view.findViewById(R.id.movieRatingBar) as RatingBar
         val overview = view.findViewById(R.id.story_descriptionTV) as TextView
 
-            arguments?.getParcelable<Movie>(Movie::class.java.simpleName)?.let { movie ->
-                Glide.with(requireContext())
-                        .load(movie.backdrop)
-                        .apply(imageOption)
-                        .into(backdrop)
+        arguments?.getParcelable<Movie>(Movie::class.java.simpleName)?.let { movie ->
+            Glide.with(requireContext())
+                .load(movie.backdrop)
+                .apply(imageOption)
+                .into(backdrop)
 
             title.text = movie.title
             ratings.rating = movie.ratings / 2
@@ -83,13 +77,11 @@ class FragmentMoviesDetails :Fragment(){
             genres.text = movie.genres.joinToString(", ")
             overview.text = movie.overview
 
-                movie?.let {
-                    viewModel.getActors(it.id)
-                }
+            movie.let {
+                viewModel.getActors(it.id)
+            }
         }
         setObservers()
-
-
     }
 
     private fun setObservers() {
@@ -108,21 +100,19 @@ class FragmentMoviesDetails :Fragment(){
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        changeFragment= context as? ChangeFragment
+        changeFragment = context as? ChangeFragment
     }
 
     override fun onDetach() {
         super.onDetach()
         changeFragment = null
-
     }
 
     companion object {
-       private val imageOption = RequestOptions()
+        private val imageOption = RequestOptions()
             .placeholder(R.drawable.ic_combined_shape)
             .fallback(R.drawable.ic_combined_shape)
             .centerCrop()
     }
-
 }
 

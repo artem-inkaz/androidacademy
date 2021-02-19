@@ -4,11 +4,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
+import com.example.androidacademy.backgroundworkmanager.UpdateMovieWorkerRequest
 import com.example.androidacademy.data.Movie
 import com.example.androidacademy.moviesdetails.FragmentMoviesDetails
 import com.example.androidacademy.movieslist.FragmentMoviesList
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.WorkManager
+import com.example.androidacademy.backgroundworkmanager.UpdateMovieWorkerRequest.Companion.WORKER_MOVIE_UPDATE_NAME
 
 class MainActivity : AppCompatActivity(), ChangeFragment {
+
+    private val backgroundRequests = UpdateMovieWorkerRequest()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +23,12 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
         if (savedInstanceState == null) {
             gotoFragmentMoviesList()
         }
+
+        WorkManager.getInstance(App.context()).enqueueUniquePeriodicWork(
+            WORKER_MOVIE_UPDATE_NAME,
+            ExistingPeriodicWorkPolicy.REPLACE,
+            backgroundRequests.periodicRequestCoroutine
+        )
     }
 
     // отображение фрагмента FragmentMoviesList.kt

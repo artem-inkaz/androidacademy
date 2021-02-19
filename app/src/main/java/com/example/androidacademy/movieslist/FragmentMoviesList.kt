@@ -24,13 +24,12 @@ class FragmentMoviesList : Fragment() {
     private var recycler: RecyclerView? = null
     private var progressBar: ProgressBar? = null
     private var changeFragment: ChangeFragment? = null
-
     private val viewModel: MoviesListViewModel by viewModels { MoviesViewModelFactory() }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_movies_list, container, false)
     }
@@ -60,7 +59,6 @@ class FragmentMoviesList : Fragment() {
                 bindMovie(movieList)
             }
         })
-
         // observe status
         viewModel.state.observe(viewLifecycleOwner, { status ->
             when (status) {
@@ -93,7 +91,6 @@ class FragmentMoviesList : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         changeFragment = null
-
     }
 
     private val moviesclickListener = object : OnRecyclerMovieClickListener {

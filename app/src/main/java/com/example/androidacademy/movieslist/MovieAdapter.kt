@@ -13,13 +13,16 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.androidacademy.data.Movie
 
 class MovieAdapter(
-        private var moviesclickListener: OnRecyclerMovieClickListener) : RecyclerView.Adapter<MovieViewHolder>() {
-
+    private var moviesclickListener: OnRecyclerMovieClickListener
+) : RecyclerView.Adapter<MovieViewHolder>() {
     private var moviesList = listOf<Movie>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder = MovieViewHolder(LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.view_holder_movie, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
+        MovieViewHolder(
+            LayoutInflater
+                .from(parent.context)
+                .inflate(R.layout.view_holder_movie, parent, false)
+        )
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.onBind(moviesList[position])
@@ -40,9 +43,9 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     companion object {
         private val imageOption = RequestOptions()
-                .placeholder(R.drawable.ic_combined_shape)
-                .fallback(R.drawable.ic_combined_shape)
-                .centerCrop()
+            .placeholder(R.drawable.ic_combined_shape)
+            .fallback(R.drawable.ic_combined_shape)
+            .centerCrop()
     }
 
     private val poster: ImageView = itemView.findViewById(R.id.movie_list_picture)
@@ -52,12 +55,11 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val runtime: TextView = itemView.findViewById(R.id.txtView_time)
     private val ratings: RatingBar = itemView.findViewById(R.id.movieRatingBar)
 
-
     fun onBind(movie: Movie) {
         Glide.with(itemView.context)
-                .load(movie.poster)
-                .apply(imageOption)
-                .into(poster)
+            .load(movie.poster)
+            .apply(imageOption)
+            .into(poster)
 
         ratings.rating = movie.ratings / 2
         movieName.text = movie.title
@@ -65,7 +67,6 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         genres.text = movie.genres.joinToString(", ")
         runtime.text = " ${movie.runtime} MIN"
     }
-
 }
 
 interface OnRecyclerMovieClickListener {

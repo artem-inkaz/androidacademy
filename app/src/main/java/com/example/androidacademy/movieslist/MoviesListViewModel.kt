@@ -1,6 +1,5 @@
 package com.example.androidacademy.movieslist
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +10,6 @@ import com.example.androidacademy.api.MoviesApi
 import com.example.androidacademy.api.convertMovieDtoToDomain
 import com.example.androidacademy.data.Movie
 import com.example.androidacademy.db.entities.MoviesRepository
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.*
 import java.lang.Exception
 
@@ -22,16 +20,17 @@ class MoviesListViewModel(
 
     private val _state = MutableLiveData<State>(State.Init)
     val state: LiveData<State> get() = _state
-
     private val _movies = MutableLiveData<List<Movie>>()
     val movies: LiveData<List<Movie>> get() = _movies
 
     fun loadMovies() {
-        loadMoviesFromDb()
-        loadMoviesFromApi()
+        viewModelScope.launch {
+            loadMoviesFromDb()
+            loadMoviesFromApi()
+        }
     }
 
-    private fun loadMoviesFromApi() {
+    private suspend fun loadMoviesFromApi() {
         viewModelScope.launch {
             try {
                 // if we got movies from db - don't change state
@@ -68,7 +67,7 @@ class MoviesListViewModel(
         }
     }
 
-    private fun saveMoviesLocally() {
+    private suspend fun saveMoviesLocally() {
         if (!movies.value.isNullOrEmpty()) {
             viewModelScope.launch {
                 repository.rewriteMoviesListIntoDB(movies.value!!)
@@ -76,7 +75,7 @@ class MoviesListViewModel(
         }
     }
 
-    private fun loadMoviesFromDb() {
+    private suspend fun loadMoviesFromDb() {
         viewModelScope.launch {
             try {
                 _state.value = State.Loading
@@ -101,6 +100,5 @@ class MoviesListViewModel(
             }
         }
     }
-
 }
 

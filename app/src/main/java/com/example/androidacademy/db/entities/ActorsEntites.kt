@@ -1,7 +1,7 @@
 package com.example.androidacademy.db.entities
 
 import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
+
 @Entity(
     tableName = DbContract.ActorContract.TABLE_NAME,
     foreignKeys = [ForeignKey(
@@ -12,7 +12,7 @@ import androidx.room.ForeignKey.CASCADE
     )],
     indices = [Index(value = [DbContract.ActorContract.COLUMN_NAME_MOVIE_ID])]
 )
-class ActorsEntites (
+class ActorsEntites(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = DbContract.ActorContract.COLUMN_NAME_ID)
     val id: Long?,
@@ -23,4 +23,4 @@ class ActorsEntites (
     val image: String?,
     @ColumnInfo(name = DbContract.ActorContract.COLUMN_NAME_MOVIE_ID)
     val movie: Long
-    )
+)

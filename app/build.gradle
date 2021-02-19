@@ -58,16 +58,12 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc03"
-
     implementation 'com.github.bumptech.glide:glide:4.4.0'
-
     implementation "androidx.fragment:fragment-ktx:1.2.5"
-
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
 
     testImplementation 'junit:junit:4.13.1'
-
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
@@ -79,11 +75,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
     implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
-    //Coil for Image download
+    // Coil for Image download
     implementation 'io.coil-kt:coil:1.1.0'
 
-    implementation "com.google.code.gson:gson:2.8.6"
-    //Room
+    // Room
     def room_version = "2.2.6"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-runtime:$room_version"
@@ -92,4 +87,7 @@ dependencies {
     // Shared Preferences
     implementation "androidx.preference:preference-ktx:1.1.1"
 
+    // WorkManager
+    implementation 'androidx.work:work-runtime-ktx:2.4.0'
+    implementation 'androidx.work:work-runtime:2.4.0'
 }
